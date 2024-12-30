@@ -117,10 +117,10 @@
                             {% if user.is_authenticated %}
                                 <div class="dropdown">
                                     <button class="btn btn-outline-primary dropdown-toggle me-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-user me-2"></i> Profil
+                                        <i class="fas fa-user me-2"></i> Profile
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                                        <li><a class="dropdown-item" href="{% url 'profile' user.id %}">Profil</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'profile' user.id %}">Profile</a></li>
                                         <li><a class="dropdown-item" href="{% url 'logout' %}">Chiqish</a></li>
                                     </ul>
                                 </div>
