@@ -48,12 +48,11 @@ def user_logout(request):
     messages.success(request, "You have been logged out.")
     return redirect('home')
 
-def profile(request, id):
+def profile(request):
     if request.user.is_authenticated:
-        user = CustomUser.objects.get(pk=id)
-        orders = Order.objects.filter(user=user)
+        user = request.user
+        orders = Order.objects.filter(user=user.id)
         today = datetime.now()
-        print(today.date())
         context = {
             'user': user,
             'orders': orders,
@@ -62,13 +61,24 @@ def profile(request, id):
         return render(request, 'users/profile.html', context)
     else:
         return redirect('login')
+
     
-def profile_edit(request, id):
+def profile_edit(request):
     if request.method == 'POST':
-        user = CustomUser.objects.get(pk=id)
-        form = UserEditForm(request.POST, instance=request.user)
+        form = UserEditForm(data=request.POST, files=request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-        else:
-            form = UserEditForm(instance=request.user)
+            return redirect('profile')
+    form = UserEditForm()
     return render(request, 'users/profile.html', {'form': form})
+
+
+def profile_delete(request, order_id):
+    if request.user.is_authenticated:
+        user = request.user.id
+        order = Order.objects.filter(id=order_id).first()
+        if order:
+            order.delete()
+        return redirect('profile')
+    else:
+        return redirect('login')
