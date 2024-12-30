@@ -1,0 +1,310 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <!-- Header Start -->
+    <div class="container-fluid page-header mb-5 p-0 room-header">
+        <div class="container-fluid page-header-inner py-5">
+            <div class="container text-center pb-5">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Xona Tafsilotlari</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center text-uppercase">
+                        <li class="breadcrumb-item"><a href="#">Bosh Sahifa</a></li>
+                        <li class="breadcrumb-item"><a href="#">Xonalar</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Xona Tafsilotlari</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!--Header End -->
+
+    <!-- Room Detail Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <div class="room-images">
+                        <img class="room-thumb" src="{{ rooms.room_images.all.first.image.url }}" alt="Xona Rasmi">
+                        <div class="room-gallery">
+                            {% for img in rooms.room_images.all %}
+                                <img class="gallery-thumb" src="{{ img.image.url }}" alt="Galereya Rasm">
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <h2 class="mb-4">{{ rooms.room_type|title }} Xona</h2>
+                    <div class="d-flex mb-3">
+                        <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>{{ rooms.beds }} Yotoq</small>
+                        {% if facilities.bathroom %}
+                            <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 Vanna</small>
+                        {% endif %}
+                        {% if facilities.wifi %}
+                            <small class="border-end me-3 pe-3"><i class="fa fa-wifi text-primary me-2"></i>Bepul WiFi</small>
+                        {% endif %}
+                        <small class="border-end me-3 pe-3"><i class="fa fa-user text-primary me-2"></i>{{ rooms.adults }} Katta</small>
+                        <small><i class="fa fa-child text-primary me-2"></i>{{ rooms.children }} Bola</small>
+                    </div>
+                    <p class="room-description">
+                        Bizning keng va hashamatli suite xonamizda eng yuqori darajadagi qulayliklarni tajriba qiling. Bu zamonaviy tarzda bezatilgan xona, ajoyib manzaralar va eng yuqori darajadagi xizmatlarni taklif etadi, shuningdek, biznes va dam olish sayohatchilari uchun mukammal tajriba yaratadi.
+                    </p>
+
+                    <div class="room-features mb-5">
+                        <h4 class="mb-4">Xona Xususiyatlari & Imkoniyatlar</h4>
+                        <div class="row g-4">
+                            {% if facilities.bathroom %}
+                            <div class="col-md-6">
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fa fa-bath"></i>
+                                    </div>
+                                    <span>Shaxsiy Vanna</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if facilities.wifi %}
+                            <div class="col-md-6">
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fa fa-wifi"></i>
+                                    </div>
+                                    <span>Bepul WiFi</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if facilities.smarttv %}
+                            <div class="col-md-6">
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fa fa-tv"></i>
+                                    </div>
+                                    <span>Smart TV</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if facilities.coffee_maker %}
+                            <div class="col-md-6">
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fa fa-coffee"></i>
+                                    </div>
+                                    <span>Kofe Tayyorlovchi</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if facilities.aircondition %}
+                            <div class="col-md-6">
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fa fa-snowflake"></i>
+                                    </div>
+                                    <span>Konditsioner</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if facilities.minibar %}
+                            <div class="col-md-6">
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fa fa-utensils"></i>
+                                    </div>
+                                    <span>Mini Bar</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if facilities.parking %}
+                            <div class="col-md-6">
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fa fa-parking"></i>
+                                    </div>
+                                    <span>Bepul Avtomobil Qoyish Joyi</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="room-policies mb-5">
+                        <h4 class="mb-4">Xona Siyosatlari</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="mb-3">Check-in Vaqti</h6>
+                                <p><i class="far fa-clock text-primary me-2"></i>2:00 PM dan</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="mb-3">Check-out Vaqti</h6>
+                                <p><i class="far fa-clock text-primary me-2"></i>12:00 PM gacha</p>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <h6 class="mb-3">Bekor qilish/Oldindan To'lov</h6>
+                        <p>Bekor qilish va oldindan to'lov siyosatlari xona turiga qarab farq qiladi. Iltimos, xonangizni tanlashda qanday shartlar qo'llanilishini tekshirib ko'ring.</p>
+                    </div>
+
+                    <div class="room-rules">
+                        <h4 class="mb-4">Xona Qoidalari</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Xonalarda chekish taqiqlangan</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Hayvonlar kiritilmaydi</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Bolalar uchun joy bor</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Kredit kartalari qabul qilinadi</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="booking-form">
+                        <h3 class="mb-4">Xonani Buyurtma Qiling</h3>
+                        <div class="price-tag">
+                            {{ rooms.price_per_night }} UZS <small>/ Kecha</small>
+                        </div>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <div class="col-md-3" style="width: 100%;">
+                                    <input type="hidden" name="room_price" value="{{rooms.price_per_night}}">
+                                    <div class="date-input-container">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <input type="date" 
+                                            class="form-control custom-date-input" 
+                                            id="checkinDate"
+                                            placeholder="Kirish"
+                                            min="{% now 'Y-m-d' %}"
+                                            name="checkin" 
+                                            required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="col-md-3" style="width: 100%;">
+                                    <div class="date-input-container">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <input type="date" 
+                                            class="form-control custom-date-input" 
+                                            id="checkoutDate"
+                                            placeholder="Chiqish"
+                                            name="checkout" 
+                                            required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select" name="adults" required>
+                                    <option value="0" disabled>Kattalar</option>
+                                    <option value="1" selected>1 Katta</option>
+                                    <option value="2">2 Katta</option>
+                                    <option value="3">3 Katta</option>
+                                    <option value="4">4 Katta</option>
+                                    <option value="5">5 Katta</option>
+                                    <option value="6">6 Katta</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select" name="children" required>
+                                    <option value="0">0 Bola</option>
+                                    <option value="1">1 Bola</option>
+                                    <option value="2">2 Bola</option>
+                                    <option value="3">3 Bola</option>
+                                    <option value="4">4 Bola</option>
+                                    <option value="5">5 Bola</option>
+                                    <option value="6">6 Bola</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 py-3">Hozir Buyurtma Qiling</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Room Detail End -->
+
+    <!-- Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <style>
+        /* Modal Patterns */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+
+        .close {
+            position: absolute;
+            right: 35px;
+            top: 15px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainImage = document.querySelector('.room-thumb');
+            const galleryThumbs = document.querySelectorAll('.gallery-thumb');
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeBtn = document.querySelector('.close');
+            
+            // Click Small Buttons
+            galleryThumbs.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    mainImage.src = this.src;
+                });
+            });
+
+            // Click Main Image
+            mainImage.addEventListener('click', function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            });
+
+            // Click Modal Close Button
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = "none";
+            });
+
+            // Close When Click Outside Image Frame 
+            window.addEventListener('click', function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+
+            // Close When Click Escape Button
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape") {
+                    modal.style.display = "none";
+                }
+            });
+        });
+    </script>
+{% endblock content %}

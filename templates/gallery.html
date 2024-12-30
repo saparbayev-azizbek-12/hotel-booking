@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+        <!-- Page Header Start -->
+        <div class="container-fluid page-header mb-5 p-0 gallery-header">
+            <div class="container-fluid page-header-inner py-5">
+                <div class="container text-center pb-5">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Gallery</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center text-uppercase">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Gallery</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+
+        <!-- Booking Start -->
+        <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container">
+                <div class="bg-white shadow" style="padding: 35px;">
+                    <div class="row g-2">
+                        <div class="col-md-10">
+                            <div class="row g-2">
+                                <div class="col-md-3">
+                                    <div class="date-input-container">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <input type="date"
+                                            class="form-control custom-date-input" 
+                                            id="checkinDate"
+                                            placeholder="Check in"
+                                            min="{% now 'Y-m-d' %}" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="date-input-container">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <input type="date" 
+                                            class="form-control custom-date-input" 
+                                            id="checkoutDate"
+                                            placeholder="Check out" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select">
+                                        <option selected>Adult</option>
+                                        <option value="1">Adult 1</option>
+                                        <option value="2">Adult 2</option>
+                                        <option value="3">Adult 3</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select">
+                                        <option selected>Child</option>
+                                        <option value="1">Child 1</option>
+                                        <option value="2">Child 2</option>
+                                        <option value="3">Child 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary w-100">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Booking End -->
+
+        <!-- Modal -->
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modalImage">
+        </div>
+
+        <style>
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 9999;
+                padding-top: 50px;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+            }
+
+            .modal-content {
+                margin: auto;
+                display: block;
+                max-width: 90%;
+                max-height: 90vh;
+            }
+
+            .close {
+                position: absolute;
+                right: 35px;
+                top: 15px;
+                color: #f1f1f1;
+                font-size: 40px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .close:hover {
+                color: #bbb;
+            }
+        </style>
+
+        <script>
+            $(document).ready(function() {
+                // Initialize Isotope
+                var $grid = $('.gallery-container').isotope({
+                    itemSelector: '.gallery-item',
+                    layoutMode: 'fitRows'
+                });
+
+                // Filter items on button click
+                $('.gallery-filters').on('click', 'button', function() {
+                    var filterValue = $(this).attr('data-filter');
+                    
+                    // Remove active class from all buttons
+                    $('.gallery-filters button').removeClass('active');
+                    // Add active class to clicked button
+                    $(this).addClass('active');
+                    
+                    if(filterValue === '*') {
+                        $grid.isotope({ filter: '*' });
+                    } else {
+                        $grid.isotope({ filter: '.' + filterValue });
+                    }
+                });
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const images = document.querySelectorAll('.img-fluid');
+                const modal = document.getElementById('imageModal');
+                const modalImg = document.getElementById('modalImage');
+                const closeBtn = document.querySelector('.close');
+                
+                images.forEach(img => {
+                    img.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        modal.style.display = "block";
+                        modalImg.src = this.src;
+                    });
+                });
+
+                closeBtn.addEventListener('click', function() {
+                    modal.style.display = "none";
+                });
+
+                window.addEventListener('click', function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                });
+
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === "Escape") {
+                        modal.style.display = "none";
+                    }
+                });
+            });
+        </script>
+
+{% endblock content %}

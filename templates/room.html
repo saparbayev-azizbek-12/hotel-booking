@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+        <!-- Page Header Start -->
+        <div class="container-fluid page-header mb-5 p-0 rooms-header">
+            <div class="container-fluid page-header-inner py-5">
+                <div class="container text-center pb-5">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Xonalar</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center text-uppercase">
+                            <li class="breadcrumb-item"><a href="#">Bosh sahifa</a></li>
+                            <li class="breadcrumb-item"><a href="#">Sahifalar</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Xonalar</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+
+
+        <!-- Booking Start -->
+        <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container">
+                <div class="bg-white shadow" style="padding: 35px;">
+                    <form method="GET" action="#rooms">
+                        {% csrf_token %}
+                        <div class="row g-2">
+                            <div class="col-md-10">
+                                <div class="row g-2">
+                                    <div class="col-md-3">
+                                        <div class="date-input-container">
+                                            <i class="far fa-calendar-alt"></i>
+                                            <input type="date" class="form-control custom-date-input" id="checkinDate" 
+                                                placeholder="Kirish sanasi" min="{% now 'Y-m-d' %}" name="checkin" 
+                                                value="{{ request.GET.checkin }}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="date-input-container">
+                                            <i class="far fa-calendar-alt"></i>
+                                            <input type="date" class="form-control custom-date-input" id="checkoutDate" 
+                                                placeholder="Chiqish sanasi" name="checkout" 
+                                                value="{{ request.GET.checkout }}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-select" name="adults">
+                                            <option value="0" {% if request.GET.adults == "0" %}selected{% endif %}>Kattalar</option>
+                                            <option value="1" {% if request.GET.adults == "1" %}selected{% endif %}>Katta 1</option>
+                                            <option value="2" {% if request.GET.adults == "2" %}selected{% endif %}>Katta 2</option>
+                                            <option value="3" {% if request.GET.adults == "3" %}selected{% endif %}>Katta 3</option>
+                                            <option value="4" {% if request.GET.adults == "4" %}selected{% endif %}>Katta 4</option>
+                                            <option value="5" {% if request.GET.adults == "5" %}selected{% endif %}>Katta 5</option>
+                                            <option value="6" {% if request.GET.adults == "6" %}selected{% endif %}>Katta 6</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-select" name="children">
+                                            <option value="0" {% if request.GET.children == "0" %}selected{% endif %}>Bolalar</option>
+                                            <option value="1" {% if request.GET.children == "1" %}selected{% endif %}>Bola 1</option>
+                                            <option value="2" {% if request.GET.children == "2" %}selected{% endif %}>Bola 2</option>
+                                            <option value="3" {% if request.GET.children == "3" %}selected{% endif %}>Bola 3</option>
+                                            <option value="4" {% if request.GET.children == "4" %}selected{% endif %}>Bola 4</option>
+                                            <option value="5" {% if request.GET.children == "5" %}selected{% endif %}>Bola 5</option>
+                                            <option value="6" {% if request.GET.children == "6" %}selected{% endif %}>Bola 6</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary w-100">Yuborish</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Booking End -->
+
+
+
+        <!-- Room Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="section-title text-center text-primary text-uppercase">Bizning xonalarimiz</h6>
+                    <h1 class="mb-5">Bizning <span class="text-primary text-uppercase">Xonalarimizni</span> o'rganing</h1>
+                </div>
+                
+                <!-- Room Filter Buttons -->
+                <div id="rooms" class="room-filters text-center mb-4 wow fadeInUp" data-wow-delay="0.2s">
+                    <form method="GET">
+                        <button class="btn btn-outline-primary px-4 mx-1 {% if not request.GET.filter_type or request.GET.filter_type == 'all' %}active{% endif %}" name="filter_type" value="all" data-filter="*">Hamma</button>
+                        <button class="btn btn-outline-primary px-4 mx-1 {% if request.GET.filter_type == 'standart' %}active{% endif %}" name="filter_type" value="standart" data-filter=".standard">Standart</button>
+                        <button class="btn btn-outline-primary px-4 mx-1 {% if request.GET.filter_type == 'lux' %}active{% endif %}" name="filter_type" value="lux" data-filter=".luxury">Luks</button>
+                        <button class="btn btn-outline-primary px-4 mx-1 {% if request.GET.filter_type == 'econom' %}active{% endif %}" name="filter_type" value="econom" data-filter=".econom">Iqtisodiy</button>
+                    </form>
+                </div>
+                
+                <div class="row g-4">
+                    <!-- Standard Room -->
+                    {% if rooms %}
+                        {% for room in rooms %}
+                            <div class="col-lg-4 col-md-6 wow fadeInUp room-item standard" data-wow-delay="0.1s">
+                                <div class="room-item shadow rounded overflow-hidden">
+                                    <div class="position-relative">
+                                        <img class="img-fluid" src="{{ room.room_images.all.first.image.url }}" alt="">
+                                        <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">{{ room.price_per_night }}/Kecha</small>
+                                    </div>
+                                    <div class="p-4 mt-2">
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <h5 class="mb-0">{{ room.room_type|title }}</h5>
+                                            <div class="ps-2">
+                                                <small class="fa fa-star text-primary"></small>
+                                                <small class="fa fa-star text-primary"></small>
+                                                <small class="fa fa-star text-primary"></small>
+                                                <small class="fa fa-star text-primary"></small>
+                                                <small class="fa fa-star text-primary"></small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mb-3">
+                                            <small ><i class="fa fa-bed text-primary me-2"></i>{{ room.beds }} Yotoq</small>
+                                            <small class="border-start ms-3 ps-3"><i class="fa fa-user text-primary me-2"></i>{{ room.adults }} Kattalar</small>
+                                            <small class="border-start ms-3 ps-3"><i class="fa fa-child text-primary me-2"></i>{{ room.children }} Bolalar</small>
+                                        </div>
+                                        <p class="text-body mb-3">Bizning xonalarimiz nafaqat qulay, balki zamonaviy uslubda jihozlangan. Har bir xona mehmonlarga eng yuqori darajadagi xizmatni taqdim etadi, bu esa sizning dam olishingizni yanada qulayroq qiladi.</p>
+                                        <div class="d-flex justify-content-between">
+                                            <a class="btn btn-sm btn-dark rounded py-2 px-4" href="{% url 'room_detail' room.id %}">Buyurtma berish</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>Xonalar topilmadi</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- Room End -->
+
+
+        <!-- Testimonial Start -->
+        <div class="container-xxl testimonial mt-5 py-5 bg-dark wow zoomIn" data-wow-delay="0.1s" style="margin-bottom: 90px;">
+            <div class="container">
+                <div class="owl-carousel testimonial-carousel py-5">
+                    <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
+                        <p>Bizning xizmatlarimiz mehmonlarimizni mamnun qilishga qaratilgan va ularning barcha ehtiyojlarini qondirishga harakat qilamiz.</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'img/testimonial-1.jpg' %}" style="width: 45px; height: 45px;">
+                            <div class="ps-3">
+                                <h6 class="fw-bold mb-1">Mijoz F.I.O</h6>
+                                <small>Kasb</small>
+                            </div>
+                        </div>
+                        <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
+                    </div>
+                    <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
+                        <p>"Xizmatlar juda yuqori darajada taqdim etiladi. Bu yerda menda chinakam orzularim amalga oshdi. Ajoyib muhit va jamoa!"</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'img/testimonial-2.jpg' %}" style="width: 45px; height: 45px;">
+                            <div class="ps-3">
+                                <h6 class="fw-bold mb-1">Sardorbek Karimov</h6>
+                                <small>IT Mutaxassisi</small>
+                            </div>
+                        </div>
+                        <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
+                    </div>
+                    <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
+                        <p>"Mehmonxona qulayligi va xizmat sifati barcha kutganlarimdan oshib ketdi. Tavsiya qilaman!"</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'img/testimonial-3.jpg' %}" style="width: 45px; height: 45px;">
+                            <div class="ps-3">
+                                <h6 class="fw-bold mb-1">Dilnoza Rashidova</h6>
+                                <small>Biznesmen</small>
+                            </div>
+                        </div>
+                        <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <!-- Testimonial End -->
+
+{% endblock content %}

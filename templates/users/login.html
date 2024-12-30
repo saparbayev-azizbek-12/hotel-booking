@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+        <!-- Login Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="login-container wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="login-header">
+                        <h3>Qaytadan xush kelibsiz</h3>
+                        <p>Iltimos, hisobingizga kirish uchun login qiling</p>
+                    </div>
+
+                    <div class="social-login">
+                        <a href="#" class="social-btn facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-btn google">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </div>
+
+                    <div class="divider">
+                        <span>yoki</span>
+                    </div>
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="email" name="username" placeholder="name@example.com">
+                            <label for="email">Elektron pochta manzili</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Parol">
+                            <label for="password">Parol</label>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="remember">
+                                    <label class="form-check-label" for="remember">
+                                        Meni eslab qol
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="forgot-password">
+                                    <a href="#" class="text-primary">Parolni unuttingizmi?</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary w-100 py-3" type="submit">Kirish</button>
+
+                        <div class="register-link">
+                            Hisobingiz yo'qmi? <a href="{% url 'register' %}" class="text-primary">Bu yerda ro'yxatdan o'ting</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+{% endblock content %}
