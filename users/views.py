@@ -54,7 +54,7 @@ def profile(request):
         orders = Order.objects.filter(user=user.id)
         today = datetime.now()
         if request.method == 'POST':
-            user_form = CustomUserEditForm(request.POST, instance=user)
+            user_form = CustomUserEditForm(request.POST, request.FILES, instance=user)
             if user_form.is_valid():
                 user_form.save()
                 return redirect('profile')
@@ -68,7 +68,6 @@ def profile(request):
         return render(request, 'users/profile.html', context)
     else:
         return redirect('login')
-
 
 
 def profile_delete(request, order_id):

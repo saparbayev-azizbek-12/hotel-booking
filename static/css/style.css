@@ -637,15 +637,16 @@
     color: #2e7d32;
 }
 
+.status-processing {
+    background: #e8f5e9;
+    color: #c4b107;
+}
+
 .status-upcoming {
     background: #e3f2fd;
     color: #1565c0;
 }
 
-.status-cancelled {
-    background: #ffebee;
-    color: #c62828;
-}
 
 .edit-profile-btn {
     margin-left: auto;
