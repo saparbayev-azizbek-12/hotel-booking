@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .forms import UserRegisterForm, UserEditForm
+from .forms import UserRegisterForm, CustomUserEditForm
 from .models import CustomUser
 from hotel.models import Order
 from datetime import datetime
@@ -53,6 +53,13 @@ def profile(request):
         user = request.user
         orders = Order.objects.filter(user=user.id)
         today = datetime.now()
+        if request.method == 'POST':
+            user_form = CustomUserEditForm(request.POST, instance=user)
+            if user_form.is_valid():
+                user_form.save()
+                return redirect('profile')
+        else:
+            user_form = CustomUserEditForm(instance=user)
         context = {
             'user': user,
             'orders': orders,
@@ -62,15 +69,6 @@ def profile(request):
     else:
         return redirect('login')
 
-    
-def profile_edit(request):
-    if request.method == 'POST':
-        form = UserEditForm(data=request.POST, files=request.FILES, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
-    form = UserEditForm()
-    return render(request, 'users/profile.html', {'form': form})
 
 
 def profile_delete(request, order_id):

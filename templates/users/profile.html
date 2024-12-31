@@ -118,20 +118,19 @@
     <!-- Profile End -->
 
     <!-- Edit Profile Modal -->
-    <form method="POST"> 
-        {% csrf_token %}
-        <div class="modal fade" id="editProfileModal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Profilni tahrirlash</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                            {{ form.as_p }}
-                        <!-- <div class="mb-3">
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Profilni tahrirlash</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="#personal"> 
+                        {% csrf_token %}
+                        <div class="mb-3">
                             <label class="form-label">Profil rasm</label>
-                            <input type="file" class="form-control" name="img">
+                            <input type="file" class="form-control" name="image">
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
@@ -150,10 +149,10 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
                             <button type="submit" class="btn btn-primary">O'zgarishlarni saqlash</button>
-                        </div> -->
+                        </div>
+                    </form>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
         {% endblock content %}
