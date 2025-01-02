@@ -97,7 +97,7 @@
                         <button class="btn btn-outline-primary px-4 mx-1 {% if not request.GET.filter_type or request.GET.filter_type == 'all' %}active{% endif %}" name="filter_type" value="all" data-filter="*">Hamma</button>
                         <button class="btn btn-outline-primary px-4 mx-1 {% if request.GET.filter_type == 'standart' %}active{% endif %}" name="filter_type" value="standart" data-filter=".standard">Standart</button>
                         <button class="btn btn-outline-primary px-4 mx-1 {% if request.GET.filter_type == 'lux' %}active{% endif %}" name="filter_type" value="lux" data-filter=".luxury">Luks</button>
-                        <button class="btn btn-outline-primary px-4 mx-1 {% if request.GET.filter_type == 'econom' %}active{% endif %}" name="filter_type" value="econom" data-filter=".econom">Iqtisodiy</button>
+                        <button class="btn btn-outline-primary px-4 mx-1 {% if request.GET.filter_type == 'econom' %}active{% endif %}" name="filter_type" value="econom" data-filter=".econom">Ekonom</button>
                     </form>
                 </div>
                 
@@ -143,47 +143,5 @@
         </div>
         <!-- Room End -->
 
-
-        <!-- Testimonial Start -->
-        <div class="container-xxl testimonial mt-5 py-5 bg-dark wow zoomIn" data-wow-delay="0.1s" style="margin-bottom: 90px;">
-            <div class="container">
-                <div class="owl-carousel testimonial-carousel py-5">
-                    <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                        <p>Bizning xizmatlarimiz mehmonlarimizni mamnun qilishga qaratilgan va ularning barcha ehtiyojlarini qondirishga harakat qilamiz.</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'img/testimonial-1.jpg' %}" style="width: 45px; height: 45px;">
-                            <div class="ps-3">
-                                <h6 class="fw-bold mb-1">Mijoz F.I.O</h6>
-                                <small>Kasb</small>
-                            </div>
-                        </div>
-                        <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
-                    </div>
-                    <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                        <p>"Xizmatlar juda yuqori darajada taqdim etiladi. Bu yerda menda chinakam orzularim amalga oshdi. Ajoyib muhit va jamoa!"</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'img/testimonial-2.jpg' %}" style="width: 45px; height: 45px;">
-                            <div class="ps-3">
-                                <h6 class="fw-bold mb-1">Sardorbek Karimov</h6>
-                                <small>IT Mutaxassisi</small>
-                            </div>
-                        </div>
-                        <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
-                    </div>
-                    <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                        <p>"Mehmonxona qulayligi va xizmat sifati barcha kutganlarimdan oshib ketdi. Tavsiya qilaman!"</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'img/testimonial-3.jpg' %}" style="width: 45px; height: 45px;">
-                            <div class="ps-3">
-                                <h6 class="fw-bold mb-1">Dilnoza Rashidova</h6>
-                                <small>Biznesmen</small>
-                            </div>
-                        </div>
-                        <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
-                    </div>                    
-                </div>
-            </div>
-        </div>
-        <!-- Testimonial End -->
 
 {% endblock content %}

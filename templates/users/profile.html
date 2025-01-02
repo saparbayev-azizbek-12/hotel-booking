@@ -84,6 +84,9 @@
                                             {% if today >= order.checkin_date and today <= order.checkout_date %}
                                                 <a class="btn btn-sm btn-outline-primary me-2" href="{% url 'room_detail' order.room.id %}">Tafsilotlarni ko'rish</a>
                                                 <a href="{% url 'profile_delete' order.id %}" class="btn btn-sm btn-outline-danger">Buyurtmani bekor qilish</a>
+                                            {% elif today <= order.checkin_date %}
+                                                <a class="btn btn-sm btn-outline-primary me-2" href="{% url 'room_detail' order.room.id %}">Tafsilotlarni ko'rish</a>
+                                                <a href="{% url 'profile_delete' order.id %}" class="btn btn-sm btn-outline-danger">Buyurtmani bekor qilish</a>    
                                             {% else %}
                                                 <a class="btn btn-sm btn-outline-primary me-2"  href="{% url 'room_detail' order.room.id %}">Tafsilotlarni ko'rish</a>
                                             {% endif %}

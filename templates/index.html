@@ -4,8 +4,6 @@
 
 {% block content %}
 
-
-
         <!-- Carousel Start -->
         <div class="container-fluid p-0 mb-5">
             <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -15,7 +13,7 @@
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
                                 <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luks Hayot</h6>
-                                <h1 class="display-3 text-white mb-4 animated slideInDown">Brend Luks Hotelni Kashf Eting</h1>
+                                <h1 class="display-3 text-white mb-4 animated slideInDown">Antaliya Hotelni Kashf Eting</h1>
                                 <a href="{% url 'room_list' %}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Bizning Xonalarimiz</a>
                                 <a href="{% url 'room_list' %}" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Xona Buyurtma Qilish</a>
                             </div>
@@ -26,7 +24,7 @@
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
                                 <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luks Hayot</h6>
-                                <h1 class="display-3 text-white mb-4 animated slideInDown">Brend Luks Hotelni Kashf Eting</h1>
+                                <h1 class="display-3 text-white mb-4 animated slideInDown">Antaliya Hotelni Kashf Eting</h1>
                                 <a href="{% url 'room_list' %}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Bizning Xonalarimiz</a>
                                 <a href="{% url 'room_list' %}" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Xona Buyurtma Qilish</a>
                             </div>
@@ -49,43 +47,56 @@
         <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container">
                 <div class="bg-white shadow" style="padding: 35px;">
-                    <div class="row g-2">
-                        <div class="col-md-10">
-                            <div class="row g-2">
-                                <div class="col-md-3">
-                                    <div class="date-input-container">
-                                        <i class="far fa-calendar-alt"></i>
-                                        <input type="date" class="form-control custom-date-input" id="checkinDate" placeholder="Kirish" min="{% now 'Y-m-d' %}" />
+                    <form action="{% url 'room_list' %}">
+                        {% csrf_token %}
+                        <div class="row g-2">
+                            <div class="col-md-10">
+                                <div class="row g-2">
+                                    <div class="col-md-3">
+                                        <div class="date-input-container">
+                                            <i class="far fa-calendar-alt"></i>
+                                            <input type="date" class="form-control custom-date-input" id="checkinDate" 
+                                                placeholder="Kirish sanasi" min="{% now 'Y-m-d' %}" name="checkin" 
+                                                value="{{ request.GET.checkin }}" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="date-input-container">
-                                        <i class="far fa-calendar-alt"></i>
-                                        <input type="date" class="form-control custom-date-input" id="checkoutDate" placeholder="Chiqish" />
+                                    <div class="col-md-3">
+                                        <div class="date-input-container">
+                                            <i class="far fa-calendar-alt"></i>
+                                            <input type="date" class="form-control custom-date-input" id="checkoutDate" 
+                                                placeholder="Chiqish sanasi" name="checkout" 
+                                                value="{{ request.GET.checkout }}" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="form-select">
-                                        <option selected>Yoshlar</option>
-                                        <option value="1">1 Kishi</option>
-                                        <option value="2">2 Kishi</option>
-                                        <option value="3">3 Kishi</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="form-select">
-                                        <option selected>Bolalar</option>
-                                        <option value="1">1 Bola</option>
-                                        <option value="2">2 Bola</option>
-                                        <option value="3">3 Bola</option>
-                                    </select>
+                                    <div class="col-md-3">
+                                        <select class="form-select" name="adults">
+                                            <option value="0" {% if request.GET.adults == "0" %}selected{% endif %}>Kattalar</option>
+                                            <option value="1" {% if request.GET.adults == "1" %}selected{% endif %}>Katta 1</option>
+                                            <option value="2" {% if request.GET.adults == "2" %}selected{% endif %}>Katta 2</option>
+                                            <option value="3" {% if request.GET.adults == "3" %}selected{% endif %}>Katta 3</option>
+                                            <option value="4" {% if request.GET.adults == "4" %}selected{% endif %}>Katta 4</option>
+                                            <option value="5" {% if request.GET.adults == "5" %}selected{% endif %}>Katta 5</option>
+                                            <option value="6" {% if request.GET.adults == "6" %}selected{% endif %}>Katta 6</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-select" name="children">
+                                            <option value="0" {% if request.GET.children == "0" %}selected{% endif %}>Bolalar</option>
+                                            <option value="1" {% if request.GET.children == "1" %}selected{% endif %}>Bola 1</option>
+                                            <option value="2" {% if request.GET.children == "2" %}selected{% endif %}>Bola 2</option>
+                                            <option value="3" {% if request.GET.children == "3" %}selected{% endif %}>Bola 3</option>
+                                            <option value="4" {% if request.GET.children == "4" %}selected{% endif %}>Bola 4</option>
+                                            <option value="5" {% if request.GET.children == "5" %}selected{% endif %}>Bola 5</option>
+                                            <option value="6" {% if request.GET.children == "6" %}selected{% endif %}>Bola 6</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary w-100">Yuborish</button>
+                            </div>
                         </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-primary w-100">Yuborish</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -164,12 +175,12 @@
                             <div class="position-relative">
                                 <img class="img-fluid" src="{% static 'img/room-1.jpg' %}" alt="">
                                 <div class="room-overlay">
-                                    <a href="" class="btn btn-primary py-1 px-3">99,999 UZS/Kecha</a>
+                                    <a class="btn btn-primary py-1 px-3">49,999 UZS/Kecha</a>
                                 </div>
                             </div>
                             <div class="p-4">
-                                <h5 class="mb-3">Luks Xona</h5>
-                                <p class="mb-4">Ushbu xona zamonaviy qulayliklar bilan jihozlangan va sizni eng yaxshi tarzda mehmondo'stlik qiladi.</p>
+                                <h5 class="mb-3">Ekonom Xona</h5>
+                                <p class="mb-4">Ekonom xona zamonaviy qulayliklar bilan jihozlangan va sizni eng yaxshi tarzda mehmondo'stlik qiladi.</p>
                                 <a class="h6 link" href="{% url 'room_list' %}">Batafsil</a>
                             </div>
                         </div>
@@ -179,13 +190,13 @@
                             <div class="position-relative">
                                 <img class="img-fluid" src="{% static 'img/room-2.jpg' %}" alt="">
                                 <div class="room-overlay">
-                                    <a href="" class="btn btn-primary py-1 px-3">79,999 UZS/Kecha</a>
+                                    <a class="btn btn-primary py-1 px-3">79,999 UZS/Kecha</a>
                                 </div>
                             </div>
                             <div class="p-4">
-                                <h5 class="mb-3">Superior Xona</h5>
-                                <p class="mb-4">Bizning Superior xonalarimizda qulaylik va shinamlikning eng yuqori darajasini topasiz.</p>
-                                <a class="h6" href="{% url 'room_list' %}">Batafsil</a>
+                                <h5 class="mb-3">Standart Xona</h5>
+                                <p class="mb-4">Bizning Standart xonalarimizda qulaylik va shinamlikning eng yuqori darajasini topasiz.</p>
+                                <a class="h6 link" href="{% url 'room_list' %}">Batafsil</a>
                             </div>
                         </div>
                     </div>
@@ -194,13 +205,13 @@
                             <div class="position-relative">
                                 <img class="img-fluid" src="{% static 'img/room-3.jpg' %}" alt="">
                                 <div class="room-overlay">
-                                    <a href="" class="btn btn-primary py-1 px-3">49,999 UZS/Kecha</a>
+                                    <a class="btn btn-primary py-1 px-3">99,999 UZS/Kecha</a>
                                 </div>
                             </div>
                             <div class="p-4">
-                                <h5 class="mb-3">Deluxe Xona</h5>
-                                <p class="mb-4">Deluxe xonamiz sizni yuqori darajadagi qulayliklar bilan ta'minlaydi. Xonada barcha zamonaviy jihozlar mavjud.</p>
-                                <a class="h6" href="{% url 'room_list' %}">Batafsil</a>
+                                <h5 class="mb-3">Luks Xona</h5>
+                                <p class="mb-4">Luks xonamiz sizni yuqori darajadagi qulayliklar bilan ta'minlaydi. Xonada barcha zamonaviy jihozlar mavjud.</p>
+                                <a class="h6 link" href="{% url 'room_list' %}">Batafsil</a>
                             </div>
                         </div>
                     </div>
@@ -297,10 +308,10 @@
                     <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
                         <p>Bizning xizmatlarimiz mehmonlarimizni mamnun qilishga qaratilgan va ularning barcha ehtiyojlarini qondirishga harakat qilamiz.</p>
                         <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'img/testimonial-1.jpg' %}" style="width: 45px; height: 45px;">
+                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'img/testimonial-3.jpg' %}" style="width: 45px; height: 45px;">
                             <div class="ps-3">
-                                <h6 class="fw-bold mb-1">Mijoz F.I.O</h6>
-                                <small>Kasb</small>
+                                <h6 class="fw-bold mb-1">Anvar Rasulov</h6>
+                                <small>Menejer</small>
                             </div>
                         </div>
                         <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
@@ -319,7 +330,7 @@
                     <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
                         <p>"Mehmonxona qulayligi va xizmat sifati barcha kutganlarimdan oshib ketdi. Tavsiya qilaman!"</p>
                         <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'img/testimonial-3.jpg' %}" style="width: 45px; height: 45px;">
+                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'img/testimonial-1.jpg' %}" style="width: 45px; height: 45px;">
                             <div class="ps-3">
                                 <h6 class="fw-bold mb-1">Dilnoza Rashidova</h6>
                                 <small>Biznesmen</small>
@@ -352,8 +363,8 @@
                                 </div>
                             </div>
                             <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">To'liq Ism</h5>
-                                <small>Lavozim</small>
+                                <h5 class="fw-bold mb-0">To'lqin Yoqubov</h5>
+                                <small>Xodim</small>
                             </div>
                         </div>
                     </div>
@@ -370,8 +381,8 @@
                                 </div>
                             </div>
                             <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">To'liq Ism</h5>
-                                <small>Lavozim</small>
+                                <h5 class="fw-bold mb-0">Hurshid Kamolov</h5>
+                                <small>Hisobchi</small>
                             </div>
                         </div>
                     </div>
@@ -387,8 +398,8 @@
                                 </div>
                             </div>
                             <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">To'liq Ism</h5>
-                                <small>Lavozim</small>
+                                <h5 class="fw-bold mb-0">Anvar Rasulov</h5>
+                                <small>Menejer</small>
                             </div>
                         </div>
                     </div>
@@ -404,8 +415,8 @@
                                 </div>
                             </div>
                             <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">To'liq Ism</h5>
-                                <small>Lavozim</small>
+                                <h5 class="fw-bold mb-0">Qodir Aliyev</h5>
+                                <small>Oshpaz</small>
                             </div>
                         </div>
                     </div>

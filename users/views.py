@@ -2,11 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserRegisterForm, CustomUserEditForm
-from .models import CustomUser
 from hotel.models import Order
 from datetime import datetime
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.method == 'POST':
@@ -51,7 +49,7 @@ def user_logout(request):
 def profile(request):
     if request.user.is_authenticated:
         user = request.user
-        orders = Order.objects.filter(user=user.id)
+        orders = Order.objects.filter(user=user.id).order_by('-id')
         today = datetime.now()
         if request.method == 'POST':
             user_form = CustomUserEditForm(request.POST, request.FILES, instance=user)

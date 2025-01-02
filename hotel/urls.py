@@ -11,5 +11,4 @@ urlpatterns = [
     path('rooms/', views.room_list, name='room_list'),
     path('checkout/', views.checkout, name='checkout'),
     path('rooms/<int:room_id>/', views.room_detail, name='room_detail'),
-    path('cancel_booking/<int:order_id>/', views.cancel_booking, name='cancel_booking'),
 ]

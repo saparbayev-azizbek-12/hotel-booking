@@ -447,54 +447,60 @@ body {
 
         <!-- Booking Start -->
         <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
-            <div class="container">
-                <div class="bg-white shadow" style="padding: 35px;">
-                    <div class="row g-2">
-                        <div class="col-md-10">
-                            <div class="row g-2">
-                                <div class="col-md-3">
-                                    <div class="date-input-container">
-                                        <i class="far fa-calendar-alt"></i>
-                                        <input type="date"
-                                            class="form-control custom-date-input" 
-                                            id="checkinDate"
-                                            placeholder="Check in"
-                                            min="{% now 'Y-m-d' %}" />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="date-input-container">
-                                        <i class="far fa-calendar-alt"></i>
-                                        <input type="date" 
-                                            class="form-control custom-date-input" 
-                                            id="checkoutDate"
-                                            placeholder="Check out" />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="form-select">
-                                        <option selected>Adult</option>
-                                        <option value="1">Adult 1</option>
-                                        <option value="2">Adult 2</option>
-                                        <option value="3">Adult 3</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="form-select">
-                                        <option selected>Child</option>
-                                        <option value="1">Child 1</option>
-                                        <option value="2">Child 2</option>
-                                        <option value="3">Child 3</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-primary w-100">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <div class="container">
+              <div class="bg-white shadow" style="padding: 35px;">
+                  <form action="{% url 'room_list' %}">
+                      {% csrf_token %}
+                      <div class="row g-2">
+                          <div class="col-md-10">
+                              <div class="row g-2">
+                                  <div class="col-md-3">
+                                      <div class="date-input-container">
+                                          <i class="far fa-calendar-alt"></i>
+                                          <input type="date" class="form-control custom-date-input" id="checkinDate" 
+                                              placeholder="Kirish sanasi" min="{% now 'Y-m-d' %}" name="checkin" 
+                                              value="{{ request.GET.checkin }}" />
+                                      </div>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <div class="date-input-container">
+                                          <i class="far fa-calendar-alt"></i>
+                                          <input type="date" class="form-control custom-date-input" id="checkoutDate" 
+                                              placeholder="Chiqish sanasi" name="checkout" 
+                                              value="{{ request.GET.checkout }}" />
+                                      </div>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <select class="form-select" name="adults">
+                                          <option value="0" {% if request.GET.adults == "0" %}selected{% endif %}>Kattalar</option>
+                                          <option value="1" {% if request.GET.adults == "1" %}selected{% endif %}>Katta 1</option>
+                                          <option value="2" {% if request.GET.adults == "2" %}selected{% endif %}>Katta 2</option>
+                                          <option value="3" {% if request.GET.adults == "3" %}selected{% endif %}>Katta 3</option>
+                                          <option value="4" {% if request.GET.adults == "4" %}selected{% endif %}>Katta 4</option>
+                                          <option value="5" {% if request.GET.adults == "5" %}selected{% endif %}>Katta 5</option>
+                                          <option value="6" {% if request.GET.adults == "6" %}selected{% endif %}>Katta 6</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <select class="form-select" name="children">
+                                          <option value="0" {% if request.GET.children == "0" %}selected{% endif %}>Bolalar</option>
+                                          <option value="1" {% if request.GET.children == "1" %}selected{% endif %}>Bola 1</option>
+                                          <option value="2" {% if request.GET.children == "2" %}selected{% endif %}>Bola 2</option>
+                                          <option value="3" {% if request.GET.children == "3" %}selected{% endif %}>Bola 3</option>
+                                          <option value="4" {% if request.GET.children == "4" %}selected{% endif %}>Bola 4</option>
+                                          <option value="5" {% if request.GET.children == "5" %}selected{% endif %}>Bola 5</option>
+                                          <option value="6" {% if request.GET.children == "6" %}selected{% endif %}>Bola 6</option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-2">
+                              <button type="submit" class="btn btn-primary w-100">Yuborish</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
         </div>
         <!-- Booking End -->
 
@@ -595,7 +601,9 @@ body {
                     </div>
                 </div>
             </div>
+            </div>
         </div>
+        
        <!-- Gallery End -->
 
 {% endblock content %}
