@@ -3,6 +3,432 @@
 {% load static %}
 
 {% block content %}
+
+<style>
+    /*** Gallery Page ***/
+    .gallery .responsive-container-block {
+  min-height: 75px;
+  height: fit-content;
+  width: 100%;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0px;
+  margin-right: auto;
+  margin-bottom: 0px;
+  margin-left: auto;
+  justify-content: flex-start;
+}
+
+.gallery .responsive-container-block.bigContainer {
+  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+}
+
+.gallery .responsive-container-block.Container {
+  max-width: 1320px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  margin-top: 50px;
+  margin-right: auto;
+  margin-bottom: 50px;
+  margin-left: auto;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.gallery .overlay {
+  position: fixed;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat-x: initial;
+  background-repeat-y: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgba(71, 69, 69, 0.7);
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+  display: none;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+
+.gallery .overlay-inner {
+  top: 50%;
+  right: 0px;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat-x: initial;
+  background-repeat-y: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: white;
+  width: fit-content;
+  padding-top: 35px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  position: relative;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  opacity: 1;
+  max-width: 50%;
+  max-height: 85%;
+}
+
+.gallery .close {
+  position: absolute;
+  top: 9px;
+  right: 15px;
+  background-image: none;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat-x: initial;
+  background-repeat-y: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+  outline-color: initial;
+  outline-style: initial;
+  outline-width: 0px;
+  color: #474545;
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border-top-style: initial;
+  border-right-style: initial;
+  border-bottom-style: initial;
+  border-left-style: initial;
+  border-top-color: initial;
+  border-right-color: initial;
+  border-bottom-color: initial;
+  border-left-color: initial;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.gallery .overlay-inner .hdImgs {
+  width: fit-content;
+  height: calc(80% - 55px);
+  display: flex;
+}
+
+.gallery .overlay-inner img {
+  max-height: 100%;
+  max-width: 100%;
+  transform: none;
+}
+
+.gallery .close:hover {
+  cursor: pointer;
+}
+
+.gallery .project {
+  position: relative;
+  width: 33%;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.gallery .btn-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.gallery .project:hover .btn-box {
+  display: block;
+}
+
+.gallery .btn {
+  cursor: pointer;
+}
+
+.gallery .smallImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .gallery .project {
+    width: 50%;
+  }
+
+  .gallery .overlay-inner {
+    width: 90%;
+  }
+}
+
+@media (max-width: 500px) {
+  .gallery .project {
+    width: 100%;
+    padding-top: 10px;
+    padding-right: 0px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+  }
+
+  .gallery .responsive-container-block.bigContainer {
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+  }
+
+  .gallery .overlay-inner {
+    max-width: 90%;
+  }
+}
+/*** Gallery Responsive CSS ***/
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&amp;display=swap');
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.wk-desk-1 {
+  width: 8.333333%;
+}
+
+.wk-desk-2 {
+  width: 16.666667%;
+}
+
+.wk-desk-3 {
+  width: 25%;
+}
+
+.wk-desk-4 {
+  width: 33.333333%;
+}
+
+.wk-desk-5 {
+  width: 41.666667%;
+}
+
+.wk-desk-6 {
+  width: 50%;
+}
+
+.wk-desk-7 {
+  width: 58.333333%;
+}
+
+.wk-desk-8 {
+  width: 66.666667%;
+}
+
+.wk-desk-9 {
+  width: 75%;
+}
+
+.wk-desk-10 {
+  width: 83.333333%;
+}
+
+.wk-desk-11 {
+  width: 91.666667%;
+}
+
+.wk-desk-12 {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .wk-ipadp-1 {
+    width: 8.333333%;
+  }
+
+  .wk-ipadp-2 {
+    width: 16.666667%;
+  }
+
+  .wk-ipadp-3 {
+    width: 25%;
+  }
+
+  .wk-ipadp-4 {
+    width: 33.333333%;
+  }
+
+  .wk-ipadp-5 {
+    width: 41.666667%;
+  }
+
+  .wk-ipadp-6 {
+    width: 50%;
+  }
+
+  .wk-ipadp-7 {
+    width: 58.333333%;
+  }
+
+  .wk-ipadp-8 {
+    width: 66.666667%;
+  }
+
+  .wk-ipadp-9 {
+    width: 75%;
+  }
+
+  .wk-ipadp-10 {
+    width: 83.333333%;
+  }
+
+  .wk-ipadp-11 {
+    width: 91.666667%;
+  }
+
+  .wk-ipadp-12 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .wk-tab-1 {
+    width: 8.333333%;
+  }
+
+  .wk-tab-2 {
+    width: 16.666667%;
+  }
+
+  .wk-tab-3 {
+    width: 25%;
+  }
+
+  .wk-tab-4 {
+    width: 33.333333%;
+  }
+
+  .wk-tab-5 {
+    width: 41.666667%;
+  }
+
+  .wk-tab-6 {
+    width: 50%;
+  }
+
+  .wk-tab-7 {
+    width: 58.333333%;
+  }
+
+  .wk-tab-8 {
+    width: 66.666667%;
+  }
+
+  .wk-tab-9 {
+    width: 75%;
+  }
+
+  .wk-tab-10 {
+    width: 83.333333%;
+  }
+
+  .wk-tab-11 {
+    width: 91.666667%;
+  }
+
+  .wk-tab-12 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .wk-mobile-1 {
+    width: 8.333333%;
+  }
+
+  .wk-mobile-2 {
+    width: 16.666667%;
+  }
+
+  .wk-mobile-3 {
+    width: 25%;
+  }
+
+  .wk-mobile-4 {
+    width: 33.333333%;
+  }
+
+  .wk-mobile-5 {
+    width: 41.666667%;
+  }
+
+  .wk-mobile-6 {
+    width: 50%;
+  }
+
+  .wk-mobile-7 {
+    width: 58.333333%;
+  }
+
+  .wk-mobile-8 {
+    width: 66.666667%;
+  }
+
+  .wk-mobile-9 {
+    width: 75%;
+  }
+
+  .wk-mobile-10 {
+    width: 83.333333%;
+  }
+
+  .wk-mobile-11 {
+    width: 91.666667%;
+  }
+
+  .wk-mobile-12 {
+    width: 100%;
+  }
+}
+</style>
         <!-- Page Header Start -->
         <div class="container-fluid page-header mb-5 p-0 gallery-header">
             <div class="container-fluid page-header-inner py-5">
@@ -72,102 +498,104 @@
         </div>
         <!-- Booking End -->
 
-        <!-- Modal -->
-        <div id="imageModal" class="modal">
-            <span class="close">&times;</span>
-            <img class="modal-content" id="modalImage">
+       <!-- Gallery Start -->
+        <div class="container">
+            <div class="gallery" unique-script-id="w-w-dm-id">
+                <div class="responsive-container-block bigContainer">
+                    <div class="responsive-container-block Container">
+                    <div class="project">
+                        <img class="smallImage image-block" src="{% static 'img/gallery-3.jpg' %}">
+                        <div class="overlay">
+                            <div class="overlay-inner">
+                                <div class="hdImgs">
+                                    <img class="squareImg" src="{% static 'img/gallery-3.jpg' %}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <img class="smallImage image-block" src="{% static 'img/gallery-4.jpg' %}">
+                        <div class="overlay">
+                            <div class="overlay-inner">
+                                <div class="hdImgs">
+                                    <img class="squareImg" src="{% static 'img/gallery-4.jpg' %}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <img class="smallImage image-block" src="{% static 'img/gallery-1.jpg' %}">
+                        <div class="overlay">
+                            <div class="overlay-inner">
+                                <div class="hdImgs">
+                                    <img class="squareImg" src="{% static 'img/gallery-1.jpg' %}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <img class="smallImage image-block" src="{% static 'img/gallery-2.jpg' %}">
+                        <div class="overlay">
+                            <div class="overlay-inner">
+                                <div class="hdImgs">
+                                    <img class="squareImg" src="{% static 'img/gallery-2.jpg' %}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <img class="smallImage image-block" src="{% static 'img/gallery-5.jpg' %}">
+                        <div class="overlay">
+                            <div class="overlay-inner">
+                                <div class="hdImgs">
+                                    <img class="squareImg" src="{% static 'img/gallery-5.jpg' %}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <img class="smallImage image-block" src="{% static 'img/gallery-6.jpg' %}">
+                        <div class="overlay">
+                            <div class="overlay-inner">
+                                <div class="hdImgs">
+                                    <img class="squareImg" src="{% static 'img/gallery-6.jpg' %}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <img class="smallImage image-block" src="{% static 'img/gallery-7.jpg' %}">
+                        <div class="overlay">
+                            <div class="overlay-inner">
+                                <div class="hdImgs">
+                                    <img class="squareImg" src="{% static 'img/gallery-7.jpg' %}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <img class="smallImage image-block" src="{% static 'img/gallery-8.jpg' %}">
+                        <div class="overlay">
+                            <div class="overlay-inner">
+                                <div class="hdImgs">
+                                    <img class="squareImg" src="{% static 'img/gallery-8.jpg' %}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <img class="smallImage image-block" src="{% static 'img/gallery-9.jpg' %}">
+                        <div class="overlay">
+                            <div class="overlay-inner">
+                                <div class="hdImgs">
+                                    <img class="squareImg" src="{% static 'img/gallery-9.jpg' %}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <style>
-            .modal {
-                display: none;
-                position: fixed;
-                z-index: 9999;
-                padding-top: 50px;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.9);
-            }
-
-            .modal-content {
-                margin: auto;
-                display: block;
-                max-width: 90%;
-                max-height: 90vh;
-            }
-
-            .close {
-                position: absolute;
-                right: 35px;
-                top: 15px;
-                color: #f1f1f1;
-                font-size: 40px;
-                font-weight: bold;
-                cursor: pointer;
-            }
-
-            .close:hover {
-                color: #bbb;
-            }
-        </style>
-
-        <script>
-            $(document).ready(function() {
-                // Initialize Isotope
-                var $grid = $('.gallery-container').isotope({
-                    itemSelector: '.gallery-item',
-                    layoutMode: 'fitRows'
-                });
-
-                // Filter items on button click
-                $('.gallery-filters').on('click', 'button', function() {
-                    var filterValue = $(this).attr('data-filter');
-                    
-                    // Remove active class from all buttons
-                    $('.gallery-filters button').removeClass('active');
-                    // Add active class to clicked button
-                    $(this).addClass('active');
-                    
-                    if(filterValue === '*') {
-                        $grid.isotope({ filter: '*' });
-                    } else {
-                        $grid.isotope({ filter: '.' + filterValue });
-                    }
-                });
-            });
-
-            document.addEventListener('DOMContentLoaded', function() {
-                const images = document.querySelectorAll('.img-fluid');
-                const modal = document.getElementById('imageModal');
-                const modalImg = document.getElementById('modalImage');
-                const closeBtn = document.querySelector('.close');
-                
-                images.forEach(img => {
-                    img.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        modal.style.display = "block";
-                        modalImg.src = this.src;
-                    });
-                });
-
-                closeBtn.addEventListener('click', function() {
-                    modal.style.display = "none";
-                });
-
-                window.addEventListener('click', function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                });
-
-                document.addEventListener('keydown', function(event) {
-                    if (event.key === "Escape") {
-                        modal.style.display = "none";
-                    }
-                });
-            });
-        </script>
+       <!-- Gallery End -->
 
 {% endblock content %}

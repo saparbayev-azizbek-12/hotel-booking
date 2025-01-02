@@ -65,7 +65,7 @@
                                             {% if today >= order.checkin_date and today <= order.checkout_date %}
                                                 <span class="booking-status status-processing">Jarayonda</span>
                                             {% elif today < order.checkin_date %}
-                                                <span class="booking-status status-processing">Kutilmoqda</span>
+                                                <span class="booking-status status-upcoming">Kutilmoqda</span>
                                             {% else %}
                                                 <span class="booking-status status-completed">Tugallangan</span>
                                             {% endif %}

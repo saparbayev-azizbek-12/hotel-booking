@@ -64,7 +64,7 @@ class Order(models.Model):
     order_id = generate_order_id()
 
     def __str__(self):
-        return str(self.user.username) if self.user else "Anonymous"
+        return str(f"{(self.user.username).title()} Checkin: {self.checkin_date} - Checkout: {self.checkout_date}") if self.user else "Anonymous"
 
     def room_detail(self):
         return self.room

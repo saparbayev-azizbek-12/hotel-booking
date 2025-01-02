@@ -33,10 +33,10 @@ def room_list(request):
     adults_ = 0
     children_ = 0
     if request.method == 'GET':
-        checkin = request.POST.get('checkin', '')
-        checkout = request.POST.get('checkout', '')
-        adults_ = request.POST.get('adults', '')
-        children_ = request.POST.get('children', '')
+        checkin = request.GET.get('checkin', '')
+        checkout = request.GET.get('checkout', '')
+        adults_ = request.GET.get('adults', '')
+        children_ = request.GET.get('children', '')
 
     if adults_ and children_:
         rooms = rooms.filter(adults__gte=int(adults_))
