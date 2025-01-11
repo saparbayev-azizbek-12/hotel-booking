@@ -67,8 +67,3 @@ class Order(models.Model):
     def room_detail(self):
         return self.room
     
-class Temprary_Order(models.Model):
-    checkin = models.DateField(null=True, blank=True)
-    checkout = models.DateField(null=True, blank=True)
-    adults = models.IntegerField(null=True, blank=True)
-    children = models.IntegerField(null=True, blank=True)

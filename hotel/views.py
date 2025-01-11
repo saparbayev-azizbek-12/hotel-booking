@@ -80,9 +80,13 @@ def room_detail(request, room_id):
     room = get_object_or_404(Room, id=room_id)
     facilities = Facilities.objects.filter(room=room).first()
 
+    adt = room.adults
+    ran1 = range(1,adt+1)
+    chld = room.children
+    ran2 = range(1,chld+1)
+
     if request.method == 'POST':
         if user.is_authenticated:
-            username = user
             checkin = request.POST.get('checkin', '').strip()
             checkout = request.POST.get('checkout', '').strip()
             adults_ = request.POST.get('adults', '').strip()
@@ -132,7 +136,7 @@ def room_detail(request, room_id):
             messages.warning(request, 'You do not have an account!')
             return redirect('login')
 
-    return render(request, 'room_detail.html', {'rooms': room, 'facilities': facilities})
+    return render(request, 'room_detail.html', {'rooms': room, 'facilities': facilities, 'ran1': ran1, 'ran2': ran2})
 
 
 def checkout(request):
