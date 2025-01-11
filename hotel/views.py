@@ -28,10 +28,16 @@ def gallery(request):
 
 
 def room_list(request):
-    today = datetime.now()
     rooms = Room.objects.all()
     orders = Order.objects.all()
 
+    today = datetime.now().date()
+
+    booked_rooms = Order.objects.filter(
+        Q(checkin_date__lte=today) & Q(checkout_date__gte=today)
+    ).values_list('room_id', flat=True)
+
+    rooms = Room.objects.exclude(id__in=booked_rooms)
 
     adults_ = 0
     children_ = 0
