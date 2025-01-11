@@ -26,7 +26,7 @@
             <div class="profile-container wow fadeInUp" data-wow-delay="0.1s">
                 <div class="profile-header">
                     <div class="profile-avatar">
-                        {% if user.image == '2000' %}
+                        {% if user.image == '' %}
                             <img src="{% static 'img/user-avatar.jpeg' %}" alt="Foydalanuvchi Avatar">
                         {% else %}
                             <img src="{{ user.image.url }}" alt="Foydalanuvchi ">
@@ -87,8 +87,9 @@
                                             {% elif today <= order.checkin_date %}
                                                 <a class="btn btn-sm btn-outline-primary me-2" href="{% url 'room_detail' order.room.id %}">Tafsilotlarni ko'rish</a>
                                                 <a href="{% url 'profile_delete' order.id %}" class="btn btn-sm btn-outline-danger">Buyurtmani bekor qilish</a>    
-                                            {% else %}
+                                                {% else %}
                                                 <a class="btn btn-sm btn-outline-primary me-2"  href="{% url 'room_detail' order.room.id %}">Tafsilotlarni ko'rish</a>
+                                                <a href="{% url 'profile_delete' order.id %}" class="btn btn-sm btn-outline-danger">Olib tashlash</a>    
                                             {% endif %}
                                         </div>
                                     </div>

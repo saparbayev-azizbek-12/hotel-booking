@@ -28,6 +28,7 @@ def gallery(request):
 
 
 def room_list(request):
+    today = datetime.now()
     rooms = Room.objects.all()
     orders = Order.objects.all()
 
