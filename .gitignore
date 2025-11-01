@@ -1,0 +1,7 @@
+venv
+/venv
+venv\
+venv
+
+migrations
+__pycache__
